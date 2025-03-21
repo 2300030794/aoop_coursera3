@@ -1,0 +1,17 @@
+import unittest
+from models import db, Product
+from tests.factories import ProductFactory
+
+class TestProductModel(unittest.TestCase):
+    def setUp(self):
+        self.product = ProductFactory(name="TestProduct")
+        db.session.add(self.product)
+        db.session.commit()
+
+    def test_find_by_name(self):
+        product = Product.query.filter_by(name="TestProduct").first()
+        self.assertIsNotNone(product)
+        self.assertEqual(product.name, "TestProduct")
+
+    def tearDown(self):
+        db.session.rollback()
