@@ -1,0 +1,13 @@
+Feature: Product Management
+
+  Scenario: Delete a product
+    Given the following products exist
+      | id | name   | category    | available |
+      | 1  | Laptop | Electronics | true      |
+    When I type "Laptop" in the search field and press the Search button
+    Then I should see the message "Success"
+    And the "category" field should contain "Electronics"
+    When I copy the "id" field, clear the form, paste the "id" field, and press the Delete button
+    Then I should see the message "Product has been Deleted!"
+    When I press the Clear button and then the Search button
+    Then the deleted product should not be in the search results
