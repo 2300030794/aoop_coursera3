@@ -1,0 +1,16 @@
+Feature: Product Management
+
+  Scenario: Update a product
+    Given the following products exist
+      | id | name   | category    | available |
+      | 1  | Laptop | Electronics | true      |
+    When I type "Laptop" in the search field and press the Search button
+    Then I should see the message "Success"
+    And the "category" field should contain "Electronics"
+    When I change the "category" field to "Gadgets" and press the Update button
+    Then I should see the message "Success"
+    When I copy the "id" field, clear the form, paste the "id" field, and press the Retrieve button
+    Then I should see the message "Success"
+    And the "category" field should contain "Gadgets"
+    When I press the Clear button and then the Search button
+    Then the updated product should be in the search results
