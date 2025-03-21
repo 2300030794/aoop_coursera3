@@ -1,0 +1,12 @@
+Feature: Product Management
+
+  Scenario: List all products
+    When I press the Clear button to remove previous entries
+    And I press the Search button
+    Then I should see the message "Success"
+    And the search results should include:
+      | name    |
+      | Hat     |
+      | Shoes   |
+      | Big Mac |
+      | Sheets  |
