@@ -1,0 +1,24 @@
+from flask import Flask, jsonify, request
+from service.models import db, Product
+
+app = Flask(__name__)
+
+@app.route("/products", methods=["GET"])
+def list_products():
+    name = request.args.get("name")
+    category = request.args.get("category")
+    available = request.args.get("available")
+
+    query = Product.query
+    if name:
+        query = query.filter_by(name=name)
+    if category:
+        query = query.filter_by(category=category)
+    if available is not None:
+        query = query.filter_by(available=available.lower() == "true")
+
+    products = query.all()
+    return jsonify([
+        {"id": p.id, "name": p.name, "category": p.category, "available": p.available}
+        for p in products
+    ]), 200
