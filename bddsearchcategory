@@ -1,0 +1,9 @@
+Feature: Product Management
+
+  Scenario: Search for a product by category
+    When I clear the page
+    And I select the "Food" category
+    And I press the Search button
+    Then I should see the message "Success"
+    And the search results should include "Big Mac"
+    And the search results should not include other products from the Background data
