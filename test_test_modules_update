@@ -1,0 +1,20 @@
+import unittest
+from models import db, Product
+from tests.factories import ProductFactory
+
+class TestProductModel(unittest.TestCase):
+    def setUp(self):
+        self.product = ProductFactory()
+        db.session.add(self.product)
+        db.session.commit()
+
+    def test_update_product(self):
+        product = Product.query.get(self.product.id)
+        product.name = "Updated Name"
+        db.session.commit()
+
+        updated_product = Product.query.get(self.product.id)
+        self.assertEqual(updated_product.name, "Updated Name")
+
+    def tearDown(self):
+        db.session.rollback()
