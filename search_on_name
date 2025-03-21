@@ -1,0 +1,8 @@
+Feature: Product Management
+
+  Scenario: Search for a product by name
+    When I enter the product name in the search field
+    And I press the Search button
+    Then I should see the message "Success"
+    And the search results should include the product with the entered name
+    And the search results should not include other unrelated products
