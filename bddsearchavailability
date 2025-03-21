@@ -1,0 +1,8 @@
+Feature: Product Management
+
+  Scenario: Search for a product by availability
+    When I set the Available dropdown to "True"
+    And I press the Search button
+    Then I should see the message "Success"
+    And the search results should include available items from the Background data
+    And the search results should not include unavailable items
