@@ -1,0 +1,12 @@
+Feature: Product Management
+
+  Scenario: Read a product by ID
+    Given the following products exist
+      | name     | category  | available |
+      | Laptop   | Electronics | true  |
+      | Phone    | Electronics | true  |
+    When I send a GET request to "/products/1"
+    Then the response status code should be 200
+    And the response should contain
+      | id   | name   | category  | available |
+      | 1    | Laptop | Electronics | true  |
